@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("primeicons/primeicons.css");
+
+@import "../public/css/flags.css";
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: inter, ubuntumono, ubuntu, system-ui;
+}
+
+@layer base {
+    html {
+        @apply antialiased dark:bg-gray-950;
+    }
+
+    body {
+        min-height: 100vh;
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+@layer components {
+    hr {
+        @apply mx-auto my-2 border-b border-gray-950/5 dark:border-white/10;
+    }
+
+    .hint {
+        @apply text-neutral-400;
+    }
+}
+

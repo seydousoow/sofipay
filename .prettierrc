@@ -1,0 +1,16 @@
+{
+  "tailwindStylesheet": "./src/styles.css",
+  "plugins": [
+    "tailwindcss-primeui",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindAttributes": [
+    "styleClass",
+    "inputStyleClass",
+    "panelStyleClass",
+    "overlayStyleClass",
+    "containerClass"
+  ],
+  "tailwindPreserveDuplicates": true,
+  "singleQuote": true
+}
