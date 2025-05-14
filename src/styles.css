@@ -4,6 +4,8 @@
 @import "../public/css/flags.css";
 @import "tailwindcss";
 
+@plugin "tailwindcss-primeui";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -23,6 +25,11 @@
     [role="button"]:not(:disabled) {
         cursor: pointer;
     }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+  }
 }
 
 @layer components {
@@ -31,7 +38,21 @@
     }
 
     .hint {
-        @apply text-neutral-400;
+      @apply absolute select-none text-xs font-normal text-neutral-400 transition-opacity mx-1.5;
     }
+
+  .invalid {
+    @apply absolute select-none text-xs font-normal text-red-600 transition-opacity mx-1.5;
+    }
+
+  .bg-blue-gradient {
+    background: rgb(28, 24, 116);
+    background: -moz-linear-gradient(120deg, rgba(28, 24, 116, 1) 0%, rgba(11, 76, 164, 1) 30%, rgba(3, 43, 96, 1) 54%, rgba(10, 52, 112, 1) 76%, rgba(17, 70, 146, 1) 100%);
+    background: -webkit-linear-gradient(120deg, rgba(28, 24, 116, 1) 0%, rgba(11, 76, 164, 1) 30%, rgba(3, 43, 96, 1) 54%, rgba(10, 52, 112, 1) 76%, rgba(17, 70, 146, 1) 100%);
+    background: linear-gradient(120deg, rgba(28, 24, 116, 1) 0%, rgba(11, 76, 164, 1) 30%, rgba(3, 43, 96, 1) 54%, rgba(10, 52, 112, 1) 76%, rgba(17, 70, 146, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1c1874", endColorstr="#114692", GradientType=1);
+  }
 }
+
+
 

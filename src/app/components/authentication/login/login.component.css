@@ -1,0 +1,5 @@
+@reference 'tailwindcss';
+
+:host {
+  @apply flex h-screen w-screen items-center justify-center overflow-auto p-0 sm:p-3 md:inset-0;
+}

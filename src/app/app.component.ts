@@ -1,40 +1,29 @@
-import { Component, effect, inject, signal, WritableSignal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Button } from 'primeng/button';
-// @ts-ignore
-import imagePath from '@svg/arrival.svg' with { loader: 'text' };
-import { Select } from 'primeng/select';
-import { DomSanitizer } from '@angular/platform-browser';
-import { CardComponent } from './components/shared/card/card.component';
-
-type TScheme = 'light' | 'dark';
-const THEME_KEY = 'theme';
+import { Component, inject, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Button, Select, CardComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [RouterOutlet, SpinnerComponent],
+  template: `
+    <router-outlet>
+      <app-spinner />
+    </router-outlet>`
 })
-export class AppComponent {
-  protected readonly API_URL = API_URL;
-  protected readonly imagePath = inject(DomSanitizer).bypassSecurityTrustHtml(imagePath);
+export class AppComponent implements OnInit {
 
-  private readonly scheme: WritableSignal<TScheme> = signal<TScheme>(this.isDarkPrefers ? 'dark' : 'light');
+  private router = inject(Router);
 
-  constructor() {
-    effect(() => {
-      localStorage.setItem(THEME_KEY, this.scheme());
-      document.documentElement.classList.toggle('dark', this.isDarkPrefers);
-    });
+  ngOnInit() {
+    this.router.events
+      .pipe(filter(evt => !(evt instanceof NavigationEnd)))
+      .subscribe(() => {
+        window.scrollTo(0, 0);
+        const theme = localStorage.getItem(THEME_KEY) === 'dark' ||
+          (!(THEME_KEY in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', theme);
+      });
   }
 
-  get isDarkPrefers(): boolean {
-    return localStorage.getItem(THEME_KEY) === 'dark' ||
-      (!(THEME_KEY in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  }
-
-  public toggleScheme() {
-    this.scheme.update(current => current === 'dark' ? 'light' : 'dark');
-  }
 }

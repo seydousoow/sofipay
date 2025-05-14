@@ -72,7 +72,11 @@
               ],
               "outputHashing": "all",
               "define": {
-                "API_URL": "'https://sofipay.org'"
+                "API_URL": "'https://sofipay.org/'",
+                "OAUTH_ISSUER": "'https://seydousoow.eu.auth0.com/'",
+                "REDIRECT_KEY": "'__app_redirect__'",
+                "TOKEN_KEY": "'__app_token__'",
+                "THEME_KEY": "'theme'"
               }
             },
             "development": {
@@ -80,7 +84,11 @@
               "extractLicenses": false,
               "sourceMap": true,
               "define": {
-                "API_URL": "'http://localhost:3000'"
+                "API_URL": "'http://51.75.242.129:4309/'",
+                "OAUTH_ISSUER": "'https://seydousoow.eu.auth0.com/'",
+                "REDIRECT_KEY": "'__app_redirect__'",
+                "TOKEN_KEY": "'__app_token__'",
+                "THEME_KEY": "'theme'"
               }
             }
           },

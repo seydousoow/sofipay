@@ -1,0 +1,10 @@
+@reference 'tailwindcss';
+
+#http-loader {
+  @apply top-0 left-0 h-full w-full fixed z-[9999];
+}
+
+.colored-parent,
+.colored > div {
+  background-color: #333;
+}

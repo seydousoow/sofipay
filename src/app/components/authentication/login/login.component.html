@@ -1,0 +1,70 @@
+<div class="relative max-h-full w-full max-w-md p-4">
+  <div
+    class="relative rounded-lg border text-white shadow not-dark:bg-gradient-to-tr not-dark:from-[#1c1874] not-dark:via-[#0b4ca4] not-dark:to-[#114692] dark:bg-white dark:text-surface-700">
+    <div class="flex flex-col items-center justify-between rounded-lg">
+      <div class="mt-4 flex w-full items-center justify-center bg-white dark:bg-transparent">
+        <img alt="logo" class="h-32" src="/images/noBgColor.png" />
+      </div>
+      <div class="flex w-full flex-col items-center justify-between p-4">
+        <p class="mb-6 w-full text-center font-semibold md:text-xl">Authentification</p>
+
+        <div class="mb-4 w-full border-b border-gray-200 dark:border-gray-700">
+          <ul class="-mb-px grid grid-cols-2 text-center text-sm font-medium">
+            @for (item of loginOptions; track item) {
+              <li>
+                <a (click)="switchLogin(item.type)"
+                   class="inline-flex w-full items-center justify-center gap-x-2 rounded-t-lg border-b-2 p-2 group text-lg
+                      {{loginType === item.type ? 'border-white bg-white dark:bg-gray-900 dark:text-white font-bold text-blue-500' : 
+                        'cursor-pointer text-white dark:text-gray-800 border-transparent hover: hover:text-primary'}}">
+                  <ng-icon [name]="item.icon" />
+                  {{ item.label }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+
+        <form [formGroup]="form" class="w-full p-4 pt-0 space-y-6">
+          @if (loginType === 'CORPORATE') {
+            <div>
+              <p-iftalabel>
+                <input formControlName="login" id="mail-login" name="login" pInputText autofocus autocomplete="email" type="email" placeholder="exemple@email.com"
+                       class="w-full"
+                       pSize="small" />
+                <label [for]="'mail-login'">Email</label>
+                @if (isControlTouched(f.login) && f.login.errors) {
+                  <div class="relative h-0 w-full">
+                    @if (f.login.hasError('required')) {
+                      <small class="invalid">Ce champ est requis.</small>
+                    } @else {
+                      <small class="invalid">Cet email est invalide.</small>
+                    }
+                  </div>
+                }
+              </p-iftalabel>
+            </div>
+            <div>
+              <p-iftalabel>
+                <p-password [feedback]="false" fluid formControlName="secret" autocomplete="off" inputId="secret" placeholder="Mot de passe" size="small" toggleMask />
+                <label [for]="'secret'">Mot de passe</label>
+              </p-iftalabel>
+            </div>
+
+            <span class="inline-block w-full cursor-pointer text-end text-sm hover:underline" routerLink="">Mot de passe oublié?</span>
+            <button (click)="corporateLogin()" [disabled]="form.invalid"
+                    class="w-full cursor-pointer rounded-lg bg-white px-5 text-center text-sm font-medium text-blue-800 py-2.5 dark-text-amber-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-900"
+                    type="submit">
+              Se connecter
+            </button>
+          } @else {
+            <button (click)="customerLogin()"
+                    class="mt-8 mb-6 w-full cursor-pointer rounded-lg bg-white px-5 text-center text-sm font-medium text-blue-800 py-2.5 hover:bg-blue-100 dark:bg-gray-800 dark:text-amber-50 dark:hover:bg-gray-900"
+                    type="submit">
+              Se connecter
+            </button>
+          }
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

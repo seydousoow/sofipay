@@ -5,6 +5,9 @@
     "prettier-plugin-tailwindcss"
   ],
   "tailwindAttributes": [
+    "class",
+    "className",
+    "ngClass",
     "styleClass",
     "inputStyleClass",
     "panelStyleClass",

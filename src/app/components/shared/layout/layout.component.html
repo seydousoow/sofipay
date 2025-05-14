@@ -1,0 +1,40 @@
+<!-- Sidebar -->
+<aside
+  class="z-20 fixed h-dvh transition-all duration-500 overflow-x-hidden left-0 top-0 ease-in-out {{!navCollapsed() ? 'w-0' : 'w-screen md:w-64 md:border-r md:border-r-gray-300'}}">
+  <div class="flex h-full w-full flex-col flex-wrap justify-items-start transition-all duration-300 ease-in-out">
+    <div class="relative flex h-16 w-64 items-center justify-center -py-2">
+      <img alt="logo" fill ngSrc="images/noBgColor.png" />
+    </div>
+    <div class="flex-grow p-3">
+    </div>
+    <div class="flex flex-nowrap items-center justify-start gap-x-2 border-t border-t-gray-300 p-3">
+      <p-avatar [image]="currentUser?.picture" class="mr-2" shape="circle" size="large" />
+      <p>{{ currentUser?.name }}</p>
+    </div>
+  </div>
+</aside>
+
+<!-- Main content -->
+<main [class.md:ml-64]="navCollapsed()"
+      class="relative my-0 mx-auto block clear-both float-[unset] right-0 min-h-dvh duration-300 transition-all ease-in-out before:duration-300 before:transition-all before:ease-in-out before:content-['']">
+
+  <!--  <header class="z-10 fixed top-0 h-16 bg-blue-900 w-full flex flex-nowrap justify-items-between items-center px-4 py-2 text-white font-bold">-->
+  <!--    &lt;!&ndash; Burger menu button - visible only on mobile &ndash;&gt;-->
+  <!--    <button (click)="toggleSidebar()" class="md:hidden">-->
+  <!--      <ng-container class="md:hidden">-->
+  <!--        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">-->
+  <!--          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />-->
+  <!--        </svg>-->
+  <!--      </ng-container>-->
+  <!--    </button>-->
+  <!--  </header>-->
+  <div class="h-[2000px] border-t border-t-gray-300 relative block p-6">
+    <div class="">
+      lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Quisquam, quod. Quisquam, quod. Quisquam,
+      <router-outlet />
+
+    </div>
+  </div>
+
+  <div (click)="closeMenu()" (keydown)="handleKeyDown($event)" class="absolute top-0 left-0 w-full h-full bg-black opacity-20 z-[1]"></div>
+</main>

@@ -1,4 +1,4 @@
-import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, LOCALE_ID, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { registerLocaleData } from '@angular/common';
@@ -10,8 +10,12 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
-import { PrimeNGCustomPreset } from './primeng/preset';
-import { PrimeNgFrTranslation } from './primeng/locale.fr';
+import primeNGConfiguration from './primeng/config';
+import { AuthenticationService } from './core/services/authentication/authentication.service';
+import { PermissionGuard } from './core/guards/permission.guard';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
+import { AuthInterceptor } from './core/auth.interceptor';
+import { provideNgIconsConfig, withContentSecurityPolicy, withExceptionLogger } from '@ng-icons/core';
 
 registerLocaleData(localeSn);
 
@@ -22,25 +26,12 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'fr_SN' },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-
-    provideHttpClient(withInterceptors([])),
+    provideHttpClient(withInterceptors([AuthInterceptor])),
+    provideOAuthClient(),
+    PermissionGuard,
+    provideAppInitializer(() => ((service: AuthenticationService) => service.initialize())(inject(AuthenticationService))),
     provideAnimationsAsync(),
-    providePrimeNG({
-      inputStyle: 'filled',
-      inputVariant: 'filled',
-      ripple: true,
-      translation: PrimeNgFrTranslation,
-      theme: {
-        preset: PrimeNGCustomPreset,
-        options: {
-          darkModeSelector: '.dark',
-          cssLayer: {
-            name: 'primeng',
-            order: 'base, theme, components, primeng, utilities'
-          }
-        }
-
-      }
-    })
+    providePrimeNG(primeNGConfiguration),
+    provideNgIconsConfig({}, withContentSecurityPolicy(), withExceptionLogger())
   ]
 };

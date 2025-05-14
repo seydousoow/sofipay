@@ -1,0 +1,11 @@
+@if (isSpinnerVisible) {
+  <div id="http-loader">
+    <div class="h-full w-full absolute filter-[alpha(opacity=70)] opacity-70 bg-[#f1f1f1]">
+      @if (spinner() === Spinkit.skLine) {
+        <div class="sk-line-material" [class.colored]="!backgroundColor()">
+          <div class="sk-child sk-bounce1" [style.background-color]="backgroundColor()"></div>
+        </div>
+      }
+    </div>
+  </div>
+}
