@@ -1,0 +1,38 @@
+<div class="flex items-center">
+  <div class="flex flex-wrap items-center gap-2.5">
+    <div class="flex items-center gap-2.5 lg:gap-4">
+      @if (historyBack) {
+        <a href="javascript:history.go(-1)"
+           class="flex h-9 w-9 items-center justify-center rounded-2xl border border-solid border-gray-200 bg-gray-200 py-2 text-black px-2.5 focusable md:h-10 md:w-10">
+          <ng-icon name="heroArrowLeftMini" size="1.2rem"></ng-icon>
+        </a>
+      } @else if (backLink) {
+        <a [queryParams]="paramsBackLink" [routerLink]="backLink" [queryParamsHandling]="queryParamHandling"
+           class="flex h-10 w-10 items-center justify-center rounded-2xl border border-solid border-gray-200 bg-gray-200 py-2 text-black px-2.5 focusable md:h-10 md:w-10">
+          <ng-icon name="heroArrowLeftMini" size="1.2rem"></ng-icon>
+        </a>
+      } @else {
+        <button (click)="backClicked.emit()"
+                class="flex h-10 w-10 items-center justify-center rounded-2xl border border-solid border-gray-200 bg-gray-200 py-2 text-black px-2.5 focusable md:h-10 md:w-10">
+          <ng-icon name="heroArrowLeftMini" size="1.2rem"></ng-icon>
+        </button>
+      }
+
+      <div class="flex flex-col gap-0">
+        <h1 class="text-lg font-extrabold text-nowrap">{{ pageTitle }}</h1>
+        @if (pageSubtitle) {
+          <p class="text-sm text-gray-700 text-nowrap">{{ pageSubtitle }}</p>
+        }
+      </div>
+    </div>
+
+    <ng-content select="[header-info]"></ng-content>
+  </div>
+
+  <ng-content select="[left-action]"></ng-content>
+</div>
+
+<div
+    class="mt-2 flex flex-1 basis-auto flex-row flex-wrap items-center justify-center gap-2.5 sm:items-baseline sm:justify-between sm:gap-5 md:mt-0 md:justify-end-safe md:gap-2.5 md:w-available">
+  <ng-content select="[right-action]"></ng-content>
+</div>

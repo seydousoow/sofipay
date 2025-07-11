@@ -5,6 +5,7 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-primeui";
+@plugin '@tailwindcss/forms';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -18,12 +19,21 @@
     }
 
     body {
+        @apply text-gray-800;
         min-height: 100vh;
     }
 
     button:not(:disabled),
     [role="button"]:not(:disabled) {
         cursor: pointer;
+    }
+
+    [type=button], button {
+        @apply cursor-pointer;
+    }
+
+    :disabled, .disabled {
+        @apply cursor-not-allowed opacity-50;
     }
 
   input:-webkit-autofill,
@@ -38,11 +48,16 @@
     }
 
     .hint {
-      @apply absolute select-none text-xs font-normal text-neutral-400 transition-opacity mx-1.5;
+        @apply absolute select-none text-xs font-normal text-neutral-400 transition-opacity mx-1.5;
     }
 
   .invalid {
     @apply absolute select-none text-xs font-normal text-red-600 transition-opacity mx-1.5;
+  }
+
+    .w-available {
+        width: available;
+        width: -webkit-fill-available;
     }
 
   .bg-blue-gradient {
@@ -52,6 +67,11 @@
     background: linear-gradient(120deg, rgba(28, 24, 116, 1) 0%, rgba(11, 76, 164, 1) 30%, rgba(3, 43, 96, 1) 54%, rgba(10, 52, 112, 1) 76%, rgba(17, 70, 146, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1c1874", endColorstr="#114692", GradientType=1);
   }
+
+    /* Accessibility focus */
+    .focusable {
+        @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:rounded-full focus-visible:ring-black;
+    }
 }
 
 

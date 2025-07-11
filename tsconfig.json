@@ -18,6 +18,7 @@
     "importHelpers": true,
     "target": "ES2024",
     "module": "ESNext",
+    "useDefineForClassFields": false,
     "paths": {
       "@svg/*": [
         "./public/svg/*"
@@ -28,6 +29,7 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "extendedTemplateDiagnostics": true
   }
 }

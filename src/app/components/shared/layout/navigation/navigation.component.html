@@ -1,20 +1,11 @@
 <nav>
-  <div class="navbar-wrapper">
-    <div class="navbar-brand header-logo">
-      <div class="">
-        <a [routerLink]="['/']" class="b-brand">
-          <div class="b-bg">
-            <i class="feather icon-trending-up"></i>
-          </div>
-          <span class="b-title">Datta Able</span>
-        </a>
+  <div class="flex flex-col flex-wrap justify-items-start space-y-4">
+    @for (item of navigations; track item.id) {
+      <div [routerLink]="buildUrl(item.url)" routerLinkActive="cursor-default !text-purple-900/80 dark:!text-white !font-bold !text-xl"
+           class="flex w-full cursor-pointer items-center justify-items-start p-2 space-x-2.5 text-purple-900/70 dark:text-gray-400">
+        <ng-icon [name]="item.icon" size="16"></ng-icon>
+        <span> {{ item.title }}</span>
       </div>
-      <a class="mobile-menu on" href="javascript:" id="mobile-collapse"><span></span></a>
-
-    </div>
-    <!--    <app-nav-content (NavCollapsedMob)="navCollapseMob()" class="scroll-div w-100" />-->
-    <div style="height: 1300px">
-      content
-    </div>
+    }
   </div>
 </nav>

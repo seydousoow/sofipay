@@ -1,0 +1,5 @@
+@reference 'tailwindcss';
+
+:host {
+    @apply sticky top-12 z-10 block bg-white px-2 py-2 md:top-0 md:-mt-4 md:flex md:py-4;
+}

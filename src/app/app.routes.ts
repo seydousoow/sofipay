@@ -6,17 +6,33 @@ import { RegistrationComponent } from './components/authentication/registration/
 import { UnauthorizedComponent } from './components/authentication/unauthorized.component';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { NotFoundComponent } from './components/authentication/not-found.component';
-import { AdminDashboardComponent } from './components/admin/dashboard/admin-dashboard.component';
+import { CorporateDashboardComponent } from './components/corporate/dashboard/corporate-dashboard.component';
 import { hasRole } from './core/guards/permission.guard';
 import { LogoutComponent } from './components/authentication/logout.component';
 import { RedirectComponent } from './components/authentication/redirect.component';
 import { RedirectGuard } from './core/guards/redirect.guard';
+import { OffersComponent } from './components/corporate/offers/offers.component';
+import { FollowUpComponent } from './components/corporate/follow-up/follow-up.component';
+import { BillingComponent } from './components/corporate/billing/billing.component';
+import { GeolocationComponent } from './components/corporate/geolocation/geolocation.component';
+import { AdminDashboardComponent } from './components/admin/dashboard/admin-dashboard.component';
 
 const adminRoutes: Routes = [
-  { path: '', component: AdminDashboardComponent }
+  { path: '', component: AdminDashboardComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
+
 const customerRoutes: Routes = [];
-const corporateRoutes: Routes = [];
+
+const corporateRoutes: Routes = [
+  { path: 'home', component: CorporateDashboardComponent },
+  { path: 'offers', component: OffersComponent },
+  { path: 'follow-up', component: FollowUpComponent },
+  { path: 'billing', component: BillingComponent },
+  { path: 'geolocation', component: GeolocationComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+];
 
 export const routes: Routes = [
   { path: AUTH_ROUTES.login, component: LoginComponent },
@@ -34,6 +50,6 @@ export const routes: Routes = [
       { path: 'customer', children: customerRoutes, canMatch: [() => hasRole('CUSTOMER')] },
       { path: 'corporate', children: corporateRoutes, canMatch: [() => hasRole('CORPORATE')] },
       { path: '**', redirectTo: `${AUTH_ROUTES.notFound}`, pathMatch: 'full' }
-    ]
+    ],
   }, { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

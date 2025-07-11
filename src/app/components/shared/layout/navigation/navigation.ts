@@ -5,7 +5,7 @@ export interface NavigationItem {
   translate?: string;
   icon?: string;
   hidden?: boolean;
-  url?: string;
+  url: string[];
   classes?: string;
   exactMatch?: boolean;
   external?: boolean;
@@ -15,6 +15,44 @@ export interface NavigationItem {
   children?: NavigationItem[];
 }
 
+export const AdminNavigationItems: NavigationItem[] = [
+  {
+    id: 'dashboard',
+    title: 'Dashboard',
+    type: 'item',
+    url: ['home'],
+    icon: 'heroHomeSolid'
+  },
+  {
+    id: 'offers',
+    title: 'Appel d\'offres',
+    type: 'item',
+    url: ['offers'],
+    icon: 'heroRssSolid'
+  },
+  {
+    id: 'follow-up',
+    title: 'Suivi',
+    type: 'item',
+    url: ['follow-up'],
+    icon: 'heroArrowTrendingUpSolid'
+  },
+  {
+    id: 'billing',
+    title: 'Facturation',
+    type: 'item',
+    url: ['billing'],
+    icon: 'heroDocumentCurrencyEuroSolid'
+  },
+  {
+    id: 'geolocation',
+    title: 'Géolocalisation',
+    type: 'item',
+    url: ['geolocation'],
+    icon: 'heroMapPinSolid'
+  }
+];
+/*
 export const NavigationItems: NavigationItem[] = [
   {
     id: 'navigation',
@@ -183,4 +221,4 @@ export const NavigationItems: NavigationItem[] = [
       }
     ]
   }
-];
+];*/

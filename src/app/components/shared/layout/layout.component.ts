@@ -3,12 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { CurrentUserService } from '../../../core/services/authentication/current-user.service';
 import { Avatar } from 'primeng/avatar';
 import { NgOptimizedImage } from '@angular/common';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
-  imports: [RouterOutlet, Avatar, NgOptimizedImage]
+  imports: [RouterOutlet, Avatar, NgOptimizedImage, NavigationComponent]
 })
 export class LayoutComponent {
   readonly navCollapsed = signal(true);
