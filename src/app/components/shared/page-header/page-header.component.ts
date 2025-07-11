@@ -2,13 +2,13 @@ import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angul
 import { Params, QueryParamsHandling, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowLeftMini } from '@ng-icons/heroicons/mini';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-page-header',
   templateUrl: './page-header.component.html',
   styleUrl: './page-header.component.css',
-  imports: [RouterLink, NgIcon, CommonModule],
+  imports: [RouterLink, NgIcon],
   viewProviders: [provideIcons({ heroArrowLeftMini })]
 })
 export class PageHeaderComponent {
