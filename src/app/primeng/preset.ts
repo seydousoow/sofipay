@@ -344,7 +344,12 @@ export const PrimeNGCustomPreset = definePreset(Aura, {
         offset: '0',
         shadow: 'none'
       },
-      transitionDuration: '{transition.duration}'
+      transitionDuration: '{transition.duration}',
+      dark: {
+        formField: {
+          backgroundColor: '{primary.color}'
+        }
+      }
     },
     list: {
       padding: '0.25rem 0.25rem',
@@ -531,6 +536,10 @@ export const PrimeNGCustomPreset = definePreset(Aura, {
         }
       },
       dark: {
+        custom: {
+          bgColor: '#030712',
+          borderColor: '{surface.200}',
+        },
         surface: {
           0: '#ffffff',
           50: '#fafafa',
@@ -562,24 +571,24 @@ export const PrimeNGCustomPreset = definePreset(Aura, {
           color: '{surface.200}'
         },
         formField: {
-          background: '{surface.950}',
+          background: '{custom.bgColor}',
           disabledBackground: '{surface.700}',
-          filledBackground: '{surface.800}',
-          filledHoverBackground: '{surface.800}',
-          filledFocusBackground: '{surface.800}',
-          borderColor: '{surface.600}',
+          filledBackground: '{custom.bgColor}',
+          filledHoverBackground: '{custom.bgColor}',
+          filledFocusBackground: '{custom.bgColor}',
+          borderColor: '{custom.borderColor}',
           hoverBorderColor: '{surface.500}',
           focusBorderColor: '{primary.color}',
           invalidBorderColor: '{red.300}',
           color: '{surface.0}',
           disabledColor: '{surface.400}',
-          placeholderColor: '{surface.400}',
+          placeholderColor: '{surface.200}',
           invalidPlaceholderColor: '{red.400}',
-          floatLabelColor: '{surface.400}',
+          floatLabelColor: '{surface.200}',
           floatLabelFocusColor: '{primary.color}',
-          floatLabelActiveColor: '{surface.400}',
+          floatLabelActiveColor: '{surface.200}',
           floatLabelInvalidColor: '{form.field.invalid.placeholder.color}',
-          iconColor: '{surface.400}',
+          iconColor: '{surface.200}',
           shadow: '0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(18, 18, 23, 0.05)'
         },
         text: {
@@ -589,32 +598,32 @@ export const PrimeNGCustomPreset = definePreset(Aura, {
           hoverMutedColor: '{surface.300}'
         },
         content: {
-          background: '{surface.900}',
-          hoverBackground: '{surface.800}',
-          borderColor: '{surface.700}',
+          background: '{custom.bgColor}',
+          hoverBackground: '{custom.bgColor}',
+          borderColor: '{custom.borderColor}',
           color: '{text.color}',
           hoverColor: '{text.hover.color}'
         },
         overlay: {
           select: {
-            background: '{surface.900}',
-            borderColor: '{surface.700}',
+            background: '{custom.bgColor}',
+            borderColor: '{custom.borderColor}',
             color: '{text.color}'
           },
           popover: {
-            background: '{surface.900}',
-            borderColor: '{surface.700}',
+            background: '{custom.bgColor}',
+            borderColor: '{custom.borderColor}',
             color: '{text.color}'
           },
           modal: {
-            background: '{surface.900}',
-            borderColor: '{surface.700}',
+            background: '{custom.bgColor}',
+            borderColor: '{custom.borderColor}',
             color: '{text.color}'
           }
         },
         list: {
           option: {
-            focusBackground: '{surface.800}',
+            focusBackground: '{custom.bgColor}',
             selectedBackground: '{highlight.background}',
             selectedFocusBackground: '{highlight.focus.background}',
             color: '{text.color}',
@@ -633,8 +642,8 @@ export const PrimeNGCustomPreset = definePreset(Aura, {
         },
         navigation: {
           item: {
-            focusBackground: '{surface.800}',
-            activeBackground: '{surface.800}',
+            focusBackground: '{custom.bgColor}',
+            activeBackground: '{custom.bgColor}',
             color: '{text.color}',
             focusColor: '{text.hover.color}',
             activeColor: '{text.hover.color}',

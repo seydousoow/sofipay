@@ -3,8 +3,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -14,11 +12,12 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2024",
-    "module": "ESNext",
-    "useDefineForClassFields": false,
+    "target": "ES2022",
+    "module": "esnext",
+    "lib": ["es2022", "dom"],
+    "useDefineForClassFields": true,
     "paths": {
       "@svg/*": [
         "./public/svg/*"
@@ -30,6 +29,15 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "extendedTemplateDiagnostics": true
-  }
+    "typeCheckHostBindings": true,
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

@@ -1,0 +1,212 @@
+<!--suppress CheckEmptyScriptTag -->
+<div class="mb-4 flex items-center gap-x-3 text-lg font-semibold">
+  <ng-icon name="heroRss" size="1.75rem"></ng-icon>
+  <p>{{ title() }}</p>
+</div>
+
+<form [formGroup]="form" class="grid grid-cols-2 gap-2.5">
+  <p-iftalabel class="col-span-2">
+    <input fluid formControlName="title" id="title" name="title" pInputText required />
+    <label for="title">Titre</label>
+  </p-iftalabel>
+
+  <p-iftalabel class="col-span-2">
+    <textarea autoResize fluid formControlName="description" id="description" pTextarea rows="4"></textarea>
+    <label for="description">Description de l'offre</label>
+  </p-iftalabel>
+
+  <!--  Products-->
+  <div class="col-span-2 grid grid-cols-1" formArrayName="products">
+    <div class="relative col-span-2 mb-2 space-x-2.5" [class.text-red-400]="f.products.length === 0">
+      Produits
+      <p-button (onClick)="addElement('products')" icon="pi pi-plus" outlined rounded severity="success" size="small" />
+      <p class="absolute text-xs top-2 right-0"> {{ productAddedSubtitle }}</p>
+    </div>
+
+    @for (product of f.products.controls; track product; let i = $index; let last = $last) {
+      <div [formGroupName]="i" class="relative col-span-2 grid grid-cols-2 w-[98%] gap-x-2 {{!last && 'mb-3 pb-2 border-b border-b-indigo-300 dark:border-b-gray-300'}}">
+        <p-iftalabel>
+          <input fluid formControlName="name" id="product-name-{{i}}" name="product-name-{{i}}" pInputText required />
+          <label for="product-name-{{i}}">Nom du produit</label>
+        </p-iftalabel>
+
+        <p-iftalabel>
+          <p-input-number id="product-quantity-{{i}}" fluid inputId="product-quantity-{{i}}" [min]="1" name="product-quantity-{{i}}" [step]="2" formControlName="quantity" />
+          <label for="product-quantity-{{i}}">Quantité (en {{ getProductQuantitySuffix(product.controls.unit.value) }})</label>
+        </p-iftalabel>
+
+        <div class="absolute top-4 -right-6">
+          <button (click)="removeElement('products', i)" type="button" class="flex items-center text-gray-800 focusable focusable-offset">
+            <span class="sr-only">Fermer</span>
+            <ng-icon name="heroXMark" size="1.2rem"></ng-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Itinerary -->
+  <div class="w-[98%] col-span-2 grid grid-cols-2 gap-2.5" formGroupName="itinerary">
+    <div class="col-span-2">Itinéraire</div>
+    <p-iftalabel>
+      <input fluid formControlName="depart" id="itinerary-depart" name="itinerary-depart" pInputText required />
+      <label for="itinerary-depart">Départ</label>
+    </p-iftalabel>
+    <p-iftalabel>
+      <input fluid formControlName="arrival" id="itinerary-arrival" name="itinerary-arrival" pInputText required />
+      <label for="itinerary-arrival">Déstination</label>
+    </p-iftalabel>
+  </div>
+
+  <!-- Market duration -->
+  <div class="w-[98%] col-span-2 grid grid-cols-2 gap-2.5" formGroupName="marketDuration">
+    <div class="col-span-2">Durée du marché</div>
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <ng-icon name="heroClock" size="1.2rem"></ng-icon>
+      </p-inputgroup-addon>
+      <p-iftalabel>
+        <p-input-number fluid formControlName="length" id="marketLength" inputId="marketLength" [min]="1" name="marketLength" required />
+        <label for="marketLength">Durée</label>
+      </p-iftalabel>
+    </p-inputgroup>
+
+    <p-iftalabel>
+      <p-select [options]="durationUnits" fluid formControlName="unit" id="marketDurationUnit" inputId="marketDurationUnit" name="marketDurationUnit" />
+      <label for="marketDurationUnit">Unité</label>
+    </p-iftalabel>
+  </div>
+
+  <!-- Trucks-->
+  <div class="col-span-2 grid grid-cols-1" formArrayName="truckCategories">
+    <div class="relative col-span-2 mb-2 space-x-2.5">
+      Véhicules de transport
+      <p-button (onClick)="addElement('truckCategories')" icon="pi pi-plus" outlined rounded severity="success" size="small" />
+      <p class="absolute text-xs top-2 right-0"> {{ truckAddedSubtitle }}</p>
+    </div>
+
+    @for (item of f.truckCategories.controls; track item; let i = $index; let last = $last) {
+      <div [formGroupName]="i" class="relative w-[98%] col-span-2 grid grid-cols-2 gap-2 {{!last && 'mb-3 pb-2 border-b border-b-indigo-300 dark:border-b-gray-300'}}">
+        <p-iftalabel>
+          <p-select fluid checkmark [options]="truckTypes" formControlName="truckType" id="truck-category-{{i}}" inputId="truck-category-{{i}}"
+                    name="truck-category-{{i}}" required />
+          <label for="truck-category-{{i}}">Type</label>
+        </p-iftalabel>
+
+        <p-iftalabel>
+          <p-input-number fluid formControlName="count" id="truck-count-{{i}}" inputId="truck-count-{{i}}" [min]="1" name="truck-count-{{i}}" required />
+          <label for="truck-count-{{i}}">Nombre de véhicule</label>
+        </p-iftalabel>
+
+        <p-iftalabel>
+          <p-input-number fluid formControlName="capacity" id="truck-capacity-{{i}}" inputId="truck-capacity-{{i}}" [min]="1" name="truck-capacity-{{i}}" required />
+          <label for="truck-capacity-{{i}}">Capacité</label>
+        </p-iftalabel>
+
+        <p-iftalabel>
+          <p-select fluid checkmark [options]="capacityUnit" formControlName="unit" id="truck-capacity-unit-{{i}}" inputId="truck-capacity-unit-{{i}}" />
+          <label for="truck-capacity-unit-{{i}}">Unité</label>
+        </p-iftalabel>
+
+        <div class="col-span-2 flex flex-nowrap items-center justify-items-start gap-2.5">
+          <p>Système GPS requis ?</p>
+          <div class="flex items-center">
+            <p-radioButton name="isGpsRequired" value="true" formControlName="isGpsRequired" inputId="isGpsRequired" />
+            <label for="with-gps-{[i}}" class="ml-2">Oui</label>
+          </div>
+
+          <div class="flex items-center">
+            <p-radioButton name="isGpsRequired" value="false" formControlName="isGpsRequired" inputId="isGpsRequired" />
+            <label for="with-gpa-{{i}}" class="ml-2">Non</label>
+          </div>
+        </div>
+
+        <div class="absolute top-[50%] -right-6">
+          <button (click)="removeElement('truckCategories', i)" type="button" class="flex items-center focusable focusable-offset">
+            <span class="sr-only">Fermer</span>
+            <ng-icon name="heroXMark" size="1.2rem"></ng-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Rotation -->
+  <div class="w-[98%] col-span-2 grid grid-cols-2 gap-2.5" formGroupName="rotation">
+    <div class="col-span-2">Rotation</div>
+    <p-iftalabel>
+      <p-input-number fluid formControlName="count" id="rotation-count" inputId="rotation-count" [min]="1" name="rotation-count" required />
+      <label for="rotation-count">Nombre de rotation</label>
+    </p-iftalabel>
+    <p-iftalabel>
+      <p-select [options]="rotationFrequencies" fluid formControlName="frequency" id="rotation-frequency" inputId="rotation-frequency" name="rotation-frequency" />
+      <label for="rotation-frequency">Fréquence</label>
+    </p-iftalabel>
+  </div>
+
+  <!-- Financial information -->
+  <div class="w-[98%] col-span-2 grid grid-cols-2 gap-2.5" formArrayName="financialConfiguration">
+    <div class="col-span-2">Information financières</div>
+
+  </div>
+
+  <!-- Fees holder -->
+  <div class="w-[98%] col-span-2 grid grid-cols-2 gap-2.5" formArrayName="fees">
+    <div class="col-span-2">Gestion frais</div>
+    @for (item of f.fees.controls; track item; let i = $index) {
+      @let title = item.controls.label.value;
+      <ng-container [formGroupName]="i">
+        <p-iftalabel>
+          <p-select [options]="feeHolders" fluid formControlName="chargeHolder" id="fee-{{title}}" inputId="fee-{{title}}" name="fee-{{title}}" />
+          <label for="fee-{{title}}">{{ translateFee(title) }}</label>
+        </p-iftalabel>
+      </ng-container>
+    }
+  </div>
+
+  <!-- Requirements -->
+  <p-iftalabel class="col-span-2">
+    <textarea autoResize fluid formControlName="requirements" id="requirements" pTextarea rows="2"></textarea>
+    <label for="requirements">Prérequis</label>
+  </p-iftalabel>
+
+  <!-- Selection criteria -->
+  <p-iftalabel class="col-span-2">
+    <textarea autoResize fluid formControlName="selectionCriteria" id="selectionCriteria" pTextarea rows="2"></textarea>
+    <label for="selectionCriteria">Critère de sélection</label>
+  </p-iftalabel>
+
+  <!-- Selection process -->
+  <p-iftalabel class="col-span-2">
+    <textarea autoResize fluid formControlName="selectionProcess" id="selectionProcess" pTextarea rows="2"></textarea>
+    <label for="selectionProcess">Procéssus de sélection</label>
+  </p-iftalabel>
+
+  <!-- Submission deadline -->
+  <p-iftalabel>
+    <p-datePicker [minDate]="deadLineLimitDate['from']"
+                  [maxDate]="deadLineLimitDate['to']"
+                  [defaultDate]="deadLineLimitDate['from']"
+                  [firstDayOfWeek]="1"
+                  [disabledDays]="[6, 0]"
+                  [showIcon]="true"
+                  [showTime]="true"
+                  [stepMinute]="5"
+                  [touchUI]="isMobile"
+                  formControlName="deadline"
+                  hourFormat="24"
+                  dateFormat="dd MM yy"
+                  inputId="deadline"
+                  id="deadline"
+                  name="deadline"
+                  readonlyInput
+                  fluid
+                  required />
+    <label for="deadline">Date limite de soumission</label>
+  </p-iftalabel>
+</form>
+
+<div class="shrink-0 gap-2 mt-2.5 pt-2.5 flex justify-end-safe items-center border-t border-t-indigo-200 dark:border-t-gray-300 w-full">
+  <p-button label="Enregistrer" (click)="createOffer()" [disabled]="form.invalid" icon="pi pi-check" />
+  <p-button label="Annuler" (click)="cancelOffer()" icon="pi pi-times" />
+</div>

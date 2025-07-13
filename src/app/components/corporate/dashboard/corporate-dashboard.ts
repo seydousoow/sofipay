@@ -4,9 +4,9 @@ import { CardComponent } from '../../shared/card/card.component';
 
 @Component({
   selector: 'app-corporate-dashboard',
-  templateUrl: './corporate-dashboard.component.html',
+  templateUrl: './corporate-dashboard.html',
   imports: [Button, CardComponent]
 })
-export class CorporateDashboardComponent {
+export class CorporateDashboard {
 
 }

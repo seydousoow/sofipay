@@ -9,7 +9,7 @@ import { take } from 'rxjs';
     <h1>Redirecting...</h1>
   `,
 })
-export class RedirectComponent implements OnInit {
+export class Redirect implements OnInit {
   private readonly router = inject(Router);
   private readonly userService = inject(CurrentUserService);
 

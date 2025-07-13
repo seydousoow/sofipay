@@ -90,7 +90,8 @@ export interface ISubmissionCriteria {
 }
 
 export enum ESubmissionFormat {
-  PLATFORM = 'PLATFORM'
+  PLATFORM = 'PLATFORM',
+  MAIL = 'MAIL',
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -105,7 +106,8 @@ export enum EDurationUnit {
   DAYS = 'DAYS',
   WEEKS = 'WEEKS',
   MONTHS = 'MONTHS',
-  ANNUALS = 'ANNUALS'
+  ANNUALS = 'ANNUALS',
+  INDEFINITE = 'INDEFINITE'
 }
 
 // noinspection JSUnusedGlobalSymbols

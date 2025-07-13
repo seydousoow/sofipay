@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
     <p>You are not authorized to access this page.</p>
   `
 })
-export class UnauthorizedComponent {
+export class Unauthorized {
 }

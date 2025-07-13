@@ -1,4 +1,4 @@
-import { ApplicationConfig, inject, LOCALE_ID, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, LOCALE_ID, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { registerLocaleData } from '@angular/common';
@@ -8,7 +8,7 @@ import { fr as frDateFnsLocale } from 'date-fns/locale';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
 import primeNGConfiguration from './primeng/config';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
@@ -24,9 +24,10 @@ setDefaultOptions({ locale: frDateFnsLocale, weekStartsOn: 1 });
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: LOCALE_ID, useValue: 'fr_SN' },
+    provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([AuthInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([AuthInterceptor])),
     provideOAuthClient(),
     PermissionGuard,
     provideAppInitializer(() => ((service: AuthenticationService) => service.initialize())(inject(AuthenticationService))),

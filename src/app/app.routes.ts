@@ -1,49 +1,49 @@
 import { Route, Routes, UrlSegment } from '@angular/router';
-import { LayoutComponent } from './components/shared/layout/layout.component';
+import { Layout } from './components/shared/layout/layout';
 import { AUTH_ROUTES } from './core/utilities/constant';
-import { LoginComponent } from './components/authentication/login/login.component';
-import { RegistrationComponent } from './components/authentication/registration/registration.component';
-import { UnauthorizedComponent } from './components/authentication/unauthorized.component';
+import { Login } from './components/authentication/login/login';
+import { Registration } from './components/authentication/registration/registration';
+import { Unauthorized } from './components/authentication/unauthorized';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
-import { NotFoundComponent } from './components/authentication/not-found.component';
-import { CorporateDashboardComponent } from './components/corporate/dashboard/corporate-dashboard.component';
+import { NotFound } from './components/authentication/not-found';
+import { CorporateDashboard } from './components/corporate/dashboard/corporate-dashboard';
 import { hasRole } from './core/guards/permission.guard';
-import { LogoutComponent } from './components/authentication/logout.component';
-import { RedirectComponent } from './components/authentication/redirect.component';
+import { Logout } from './components/authentication/logout';
+import { Redirect } from './components/authentication/redirect';
 import { RedirectGuard } from './core/guards/redirect.guard';
-import { OffersComponent } from './components/corporate/offers/offers.component';
-import { FollowUpComponent } from './components/corporate/follow-up/follow-up.component';
-import { BillingComponent } from './components/corporate/billing/billing.component';
-import { GeolocationComponent } from './components/corporate/geolocation/geolocation.component';
-import { AdminDashboardComponent } from './components/admin/dashboard/admin-dashboard.component';
+import { Offers } from './components/corporate/offers/offers';
+import { FollowUp } from './components/corporate/follow-up/follow-up';
+import { Billing } from './components/corporate/billing/billing';
+import { Geolocation } from './components/corporate/geolocation/geolocation';
+import { AdminDashboard } from './components/admin/dashboard/admin-dashboard';
 
 const adminRoutes: Routes = [
-  { path: '', component: AdminDashboardComponent },
+  { path: '', component: AdminDashboard },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 const customerRoutes: Routes = [];
 
 const corporateRoutes: Routes = [
-  { path: 'home', component: CorporateDashboardComponent },
-  { path: 'offers', component: OffersComponent },
-  { path: 'follow-up', component: FollowUpComponent },
-  { path: 'billing', component: BillingComponent },
-  { path: 'geolocation', component: GeolocationComponent },
+  { path: 'home', component: CorporateDashboard },
+  { path: 'offers', component: Offers },
+  { path: 'follow-up', component: FollowUp },
+  { path: 'billing', component: Billing },
+  { path: 'geolocation', component: Geolocation },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 export const routes: Routes = [
-  { path: AUTH_ROUTES.login, component: LoginComponent },
-  { path: AUTH_ROUTES.registration, component: RegistrationComponent },
-  { path: AUTH_ROUTES.unauthorized, component: UnauthorizedComponent },
-  { path: AUTH_ROUTES.notFound, component: NotFoundComponent },
-  { path: AUTH_ROUTES.logout, component: LogoutComponent },
-  { path: AUTH_ROUTES.redirect, component: RedirectComponent, canMatch: [(_: Route, segments: UrlSegment[]) => RedirectGuard(_, segments)] },
+  { path: AUTH_ROUTES.login, component: Login },
+  { path: AUTH_ROUTES.registration, component: Registration },
+  { path: AUTH_ROUTES.unauthorized, component: Unauthorized },
+  { path: AUTH_ROUTES.notFound, component: NotFound },
+  { path: AUTH_ROUTES.logout, component: Logout },
+  { path: AUTH_ROUTES.redirect, component: Redirect, canMatch: [(_: Route, segments: UrlSegment[]) => RedirectGuard(_, segments)] },
   {
     path: '',
-    component: LayoutComponent,
+    component: Layout,
     canMatch: [(_: Route, segments: UrlSegment[]) => AuthenticationGuard(_, segments)],
     children: [
       { path: 'admin', children: adminRoutes, canMatch: [() => hasRole('ADMIN')] },

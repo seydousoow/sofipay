@@ -1,0 +1,30 @@
+@if (opened()) {
+  <div aria-labelledby="modal-title" aria-modal="true" class="relative z-[999]" role="dialog">
+    <app-overlay></app-overlay>
+
+    <div class="fixed inset-0 overflow-y-auto z-[999]">
+      <div [ngClass]="{
+        'justify-center': horizontalAlignment() === 'center',
+        'justify-start': horizontalAlignment() === 'start',
+        'justify-end': horizontalAlignment() === 'end',
+        'sm:items-center': horizontalAlignment() === 'center',
+        'sm:items-start': horizontalAlignment() === 'start',
+        'sm:items-end': horizontalAlignment() === 'end'
+      }" class="flex min-h-full items-end p-4 text-center">
+        <div cdkTrapFocus cdkTrapFocusAutoCapture="true" [ngClass]="sizeClass()" AppOutsideClick
+             (outsideClick)="overlayDismissible() && close()"
+             class="relative h-full transform overflow-y-auto rounded-lg border border-gray-700 bg-white px-4 pt-5 pb-4 text-left transition-all max-h-[90vh] w-18/19 dark:bg-gray-950 dark:border-white/70 sm:my-8 sm:p-6">
+          @if (xDismissible()) {
+            <div class="absolute top-6 right-4">
+              <button (click)="close()" type="button" class="flex items-center focusable focusable-offset">
+                <span class="sr-only">Fermer</span>
+                <ng-icon name="heroXMark" size="1.5rem"></ng-icon>
+              </button>
+            </div>
+          }
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+}

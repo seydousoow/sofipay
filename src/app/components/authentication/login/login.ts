@@ -20,11 +20,11 @@ type TLoginNav = {
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink, Password, IftaLabel, InputText, NgIcon],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: './login.html',
+  styleUrl: './login.css',
   providers: [provideIcons({ heroUserSolid, heroBuildingOffice2Solid })]
 })
-export class LoginComponent implements OnInit {
+export class Login implements OnInit {
 
   loginType: TLoginType = 'CUSTOMER';
 

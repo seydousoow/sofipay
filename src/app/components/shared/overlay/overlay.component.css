@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+:host {
+  @apply fixed left-0 top-0 h-screen w-screen bg-black opacity-40 inset-0 z-[999];
+}

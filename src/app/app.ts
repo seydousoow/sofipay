@@ -1,17 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
-import { SpinnerComponent } from './components/shared/spinner/spinner.component';
+import { Spinner } from './components/shared/spinner/spinner';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SpinnerComponent],
+  imports: [RouterOutlet, Spinner],
   template: `
     <router-outlet>
       <app-spinner />
     </router-outlet>`
 })
-export class AppComponent implements OnInit {
+export class App implements OnInit {
 
   private router = inject(Router);
 

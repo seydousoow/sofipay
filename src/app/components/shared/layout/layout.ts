@@ -3,15 +3,15 @@ import { RouterOutlet } from '@angular/router';
 import { CurrentUserService } from '../../../core/services/authentication/current-user.service';
 import { Avatar } from 'primeng/avatar';
 import { NgOptimizedImage } from '@angular/common';
-import { NavigationComponent } from './navigation/navigation.component';
+import { Navigation } from './navigation/navigation';
 
 @Component({
   selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css'],
-  imports: [RouterOutlet, Avatar, NgOptimizedImage, NavigationComponent]
+  templateUrl: './layout.html',
+  styleUrls: ['./layout.css'],
+  imports: [RouterOutlet, Avatar, NgOptimizedImage, Navigation]
 })
-export class LayoutComponent {
+export class Layout {
   readonly navCollapsed = signal(true);
 
   private readonly scheme = signal<'light' | 'dark'>(this.isDarkPrefers ? 'dark' : 'light');

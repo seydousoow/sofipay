@@ -4,9 +4,9 @@ import { CardComponent } from '../../shared/card/card.component';
 
 @Component({
   selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
+  templateUrl: './admin-dashboard.html',
   imports: [Button, CardComponent]
 })
-export class AdminDashboardComponent {
+export class AdminDashboard {
 
 }

@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+div[role=dialog] > div > div:has(img.carousel-displayed) {
+    @apply p-0;
+}
+
+div[role=dialog] > div > div:has(img.carousel-displayed) > div {
+    @apply m-0 max-w-[unset] h-screen overflow-clip rounded-none;
+}

@@ -6,12 +6,12 @@ import { heroArrowLeftMini } from '@ng-icons/heroicons/mini';
 
 @Component({
   selector: 'app-page-header',
-  templateUrl: './page-header.component.html',
-  styleUrl: './page-header.component.css',
+  templateUrl: './page-header.html',
+  styleUrl: './page-header.css',
   imports: [RouterLink, NgIcon],
   viewProviders: [provideIcons({ heroArrowLeftMini })]
 })
-export class PageHeaderComponent {
+export class PageHeader {
   @Input({ required: true }) pageTitle!: string;
   @Input() pageSubtitle?: string;
   @Input({ transform: booleanAttribute }) displayPrevious = true;

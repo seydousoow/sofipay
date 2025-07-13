@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
     <p>logout works!</p>
   `
 })
-export class LogoutComponent {
+export class Logout {
 
 }

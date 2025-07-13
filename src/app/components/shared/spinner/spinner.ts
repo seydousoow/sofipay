@@ -4,11 +4,11 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
 
 @Component({
   selector: 'app-spinner',
-  templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css', './spinkit-css/sk-line-material.css'],
+  templateUrl: './spinner.html',
+  styleUrls: ['./spinner.css', './spinkit-css/sk-line-material.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SpinnerComponent implements OnDestroy {
+export class Spinner implements OnDestroy {
   isSpinnerVisible = true;
   // noinspection SpellCheckingInspection
   Spinkit = Spinkit;

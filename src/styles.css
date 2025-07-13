@@ -5,36 +5,41 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-primeui";
-@plugin '@tailwindcss/forms';
+@plugin "@tailwindcss/forms";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: inter, ubuntumono, ubuntu, system-ui;
+  --font-sans: inter, ubuntumono, ubuntu, system-ui;
+  --color-gray-950: #030712;
 }
 
 @layer base {
-    html {
-        @apply antialiased dark:bg-gray-950;
-    }
+  :root {
+    color-scheme: light dark;
+  }
 
-    body {
-        @apply text-gray-800;
-        min-height: 100vh;
-    }
+  html {
+    @apply antialiased bg-white dark:bg-gray-950;
+  }
 
-    button:not(:disabled),
-    [role="button"]:not(:disabled) {
-        cursor: pointer;
-    }
+  body {
+    @apply text-gray-800 dark:text-white/90;
+    min-height: 100vh;
+  }
 
-    [type=button], button {
-        @apply cursor-pointer;
-    }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 
-    :disabled, .disabled {
-        @apply cursor-not-allowed opacity-50;
-    }
+  [type=button], button {
+    @apply cursor-pointer;
+  }
+
+  :disabled, .disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
 
   input:-webkit-autofill,
   input:-webkit-autofill:focus {
@@ -43,22 +48,22 @@
 }
 
 @layer components {
-    hr {
-        @apply mx-auto my-2 border-b border-gray-950/5 dark:border-white/10;
-    }
+  hr {
+    @apply mx-auto my-2 border-b border-gray-950/10 dark:border-white/60;
+  }
 
-    .hint {
-        @apply absolute select-none text-xs font-normal text-neutral-400 transition-opacity mx-1.5;
-    }
+  .hint {
+    @apply absolute select-none text-xs font-normal text-neutral-700 transition-opacity mx-1.5 dark:text-neutral-300;
+  }
 
   .invalid {
     @apply absolute select-none text-xs font-normal text-red-600 transition-opacity mx-1.5;
   }
 
-    .w-available {
-        width: available;
-        width: -webkit-fill-available;
-    }
+  .w-available {
+    width: available;
+    width: -webkit-fill-available;
+  }
 
   .bg-blue-gradient {
     background: rgb(28, 24, 116);
@@ -68,10 +73,22 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1c1874", endColorstr="#114692", GradientType=1);
   }
 
-    /* Accessibility focus */
-    .focusable {
-        @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:rounded-full focus-visible:ring-black;
-    }
+  /* Accessibility focus */
+  .focusable {
+    @apply focus-visible:rounded-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black dark:focus-visible:ring-white;
+  }
+
+  .focusable-offset {
+    @apply focus-visible:ring-offset-2;
+  }
+
+  .focusable.white {
+    @apply focus-visible:ring-white;
+  }
+
+  .focusable.green {
+    @apply focus-visible:ring-green-500;
+  }
 }
 
 

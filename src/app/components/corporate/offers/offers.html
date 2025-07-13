@@ -1,0 +1,10 @@
+<app-page-header pageTitle="Appel d'offres">
+  <ng-container right-action>
+    <p-button (click)="showCreationDialog.set(true)" icon="pi pi-plus" label="Ajouter" outlined raised size="small"/>
+  </ng-container>
+</app-page-header>
+<div class="h-[2000px] bg-purple-95"></div>
+
+<app-modal [(opened)]="showCreationDialog" sizeClass="sm:max-w-5xl" xDismissible>
+  <app-new-offer (cancel)="showCreationDialog.set(false)" [title]="modalTitle()"/>
+</app-modal>
